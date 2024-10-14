@@ -6,6 +6,8 @@ github.com/halushko/kino-cat-core-go v0.0.0-20241014122600-0bc9d6948808 h1:5RFm7
 github.com/halushko/kino-cat-core-go v0.0.0-20241014122600-0bc9d6948808/go.mod h1:5nB9PMvPVXZBzd/bYtVNebhcL7W2VwU3Z6BI92reHuU=
 github.com/halushko/kino-cat-core-go v0.0.0-20241014162014-bacab4bb4e03 h1:eqA7pNeFCSjBDNgMQB5LAMEOP6/GR0K7hZ2A6G23Drg=
 github.com/halushko/kino-cat-core-go v0.0.0-20241014162014-bacab4bb4e03/go.mod h1:5nB9PMvPVXZBzd/bYtVNebhcL7W2VwU3Z6BI92reHuU=
+github.com/halushko/kino-cat-core-go v0.0.0-20241014163802-18219f16f2c5 h1:5Xuf5gGuInx51CK75mc8Ob+QpQwsOj258PhVUX2XsSM=
+github.com/halushko/kino-cat-core-go v0.0.0-20241014163802-18219f16f2c5/go.mod h1:5nB9PMvPVXZBzd/bYtVNebhcL7W2VwU3Z6BI92reHuU=
 github.com/klauspost/compress v1.17.2 h1:RlWWUY/Dr4fL8qk9YG7DTZ7PDgME2V4csBXA8L/ixi4=
 github.com/klauspost/compress v1.17.2/go.mod h1:ntbaceVETuRiXiv4DpjP66DpAtAGkEQskQzEyD//IeE=
 github.com/nats-io/nats.go v1.37.0 h1:07rauXbVnnJvv1gfIyghFEo6lUcYRY0WXc3x7x0vUxE=
