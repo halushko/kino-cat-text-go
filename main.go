@@ -6,6 +6,7 @@ import (
 	"os"
 )
 
+//goland:noinspection ALL
 func main() {
 	logFile := prepareLogFile()
 	log.SetOutput(logFile)
