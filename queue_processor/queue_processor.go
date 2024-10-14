@@ -8,9 +8,9 @@ import (
 var queues = map[string][]string{
 	"/space":                 {"FILE_MOVE_TO_FOLDER"},
 	"/start_":                {"FILE_SHOW_FREE_SPACE"},
-	"/list":                  {"EXECUTE_TORRENT_COMMAND_SHOW_COMMANDS", "відобразити всі торенти, можна запускати для конкретного сховища"},
+	"/list":                  {"EXECUTE_TORRENT_COMMAND_LIST", "відобразити всі торенти, можна запускати для конкретного сховища"},
 	"/list_":                 {},
-	"/more_":                 {"EXECUTE_TORRENT_COMMAND_LIST_FILES", "перелічити можливі команди для вказаного торента"},
+	"/more_":                 {"EXECUTE_TORRENT_COMMAND_LIST_FILES", "перелічити можливі команди для вказаного торента"}, //
 	"/resume_":               {"EXECUTE_TORRENT_COMMAND_RESUME_TORRENT", "продовжити закачувати цей торент"},
 	"/pause_":                {"EXECUTE_TORRENT_COMMAND_PAUSE_TORRENT", "тимчасово припинити закачувати цей торент"},
 	"/resume_all":            {"EXECUTE_TORRENT_COMMAND_RESUME_ALL_TORRENTS", "продовжити закачувати всі торенти, можна запускати для конкретного сховища"},
