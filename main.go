@@ -14,7 +14,5 @@ func main() {
 	go listeners.StartUserMessageListener()
 	go listeners.StartGetHelpCommandListener()
 
-	//block := make(chan struct{})
-	defer logger_helper.SoftLogClose(logFile)
-	//<-block
+	select {}
 }
