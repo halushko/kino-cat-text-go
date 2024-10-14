@@ -16,7 +16,6 @@ type TelegramUserNatsMessage struct {
 
 type commandNatsMessage struct {
 	ChatID    int64    `json:"chat_id"`
-	Command   string   `json:"command"`
 	Arguments []string `json:"arguments"`
 }
 
@@ -28,20 +27,6 @@ func StartUserMessageListener() {
 		log.Printf("[StartNatsListener] Парсинг повідомлення: chatID = %d, message = %s", chatId, messageText) // Новый лог для проверки данных
 
 		if chatId != 0 && messageText != "" {
-
-			jsonData, err := json.Marshal(TelegramUserNatsMessage{
-				ChatId: chatId,
-				Text:   messageText,
-			})
-			if err != nil {
-				log.Printf("[HandleTextMessages] ERROR:%s", err)
-				return
-			}
-			if err = nats_helper.PublishToNATS("TELEGRAM_OUTPUT_TEXT_QUEUE", jsonData); err != nil {
-				log.Printf("[HandleTextMessages] ERROR:%s", err)
-				return
-			}
-
 			queue, arguments := findDataToAnotherProcessorRedirection(messageText)
 
 			if request, errMarshal := json.Marshal(commandNatsMessage{

@@ -11,8 +11,8 @@ func main() {
 	logFile := logger_helper.SoftPrepareLogFile()
 	log.SetOutput(logFile)
 
-	listeners.StartUserMessageListener()
-	listeners.StartGetHelpCommandListener()
+	go listeners.StartUserMessageListener()
+	go listeners.StartGetHelpCommandListener()
 
 	block := make(chan struct{})
 	defer logger_helper.SoftLogClose(logFile)
