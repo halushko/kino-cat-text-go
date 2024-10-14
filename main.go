@@ -14,5 +14,7 @@ func main() {
 	go listeners.StartUserMessageListener()
 	go listeners.StartGetHelpCommandListener()
 
-	//select {}
+	defer logger_helper.SoftLogClose(logFile)
+
+	select {}
 }

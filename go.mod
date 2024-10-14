@@ -3,7 +3,7 @@ module kino-cat-text-go
 go 1.23.2
 
 require (
-	github.com/halushko/kino-cat-core-go v0.0.0-20241014163802-18219f16f2c5
+	github.com/halushko/kino-cat-core-go v0.0.0-20241014165750-3e9a38ec7901
 	github.com/nats-io/nats.go v1.37.0
 )
 
