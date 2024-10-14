@@ -1,4 +1,4 @@
-package kino_cat_text_go
+package main
 
 import (
 	"github.com/halushko/kino-cat-core-go/logger_helper"
@@ -14,5 +14,7 @@ func main() {
 	listeners.StartUserMessageListener()
 	listeners.StartGetHelpCommandListener()
 
-	logger_helper.SoftLogClose(logFile)
+	block := make(chan struct{})
+	defer logger_helper.SoftLogClose(logFile)
+	<-block
 }
