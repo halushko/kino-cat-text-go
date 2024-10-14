@@ -15,7 +15,7 @@ func StartGetHelpCommandListener() {
 
 		log.Printf("[StartGetHelpCommandListener] Парсинг повідомлення: chatID = %d, message = %s", chatId, messageText) // Новый лог для проверки данных
 
-		if chatId != 0 && messageText != "" {
+		if chatId != 0 {
 
 			jsonData, err := json.Marshal(TelegramUserNatsMessage{
 				ChatId: chatId,
@@ -25,7 +25,7 @@ func StartGetHelpCommandListener() {
 				log.Printf("[StartGetHelpCommandListener] ERROR:%s", err)
 				return
 			}
-			if err = nats_helper.PublishToNATS("TELEGRAM_INPUT_TEXT_QUEUE", jsonData); err != nil {
+			if err = nats_helper.PublishToNATS("TELEGRAM_OUTPUT_TEXT_QUEUE", jsonData); err != nil {
 				log.Printf("[StartGetHelpCommandListener] ERROR:%s", err)
 				return
 			}

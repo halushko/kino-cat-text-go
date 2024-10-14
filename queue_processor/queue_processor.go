@@ -25,7 +25,7 @@ var queues = map[string][]string{
 	"/downloads":             {"EXECUTE_LIST_TORRENTS_IN_DOWNLOAD_STATUS", "відобразити всі торенти що знаходяться в стані \"завантаження\""},
 	"/help":                  {"DISPLAY_ALL_COMMANDS", "вивести інформацію по всім командам"},
 	"":                       {"EXECUTE_TORRENT_COMMAND_SEARCH_BY_NAME"},
-	"<якийсь текст>":         {"", "почати процедуру видалення вказаного торента"},
+	"<якийсь текст>":         {"", "пошук торентів по частині назві"},
 }
 
 func FindQueueByMessage(message string) (string, bool) {
@@ -51,12 +51,12 @@ func GetAllDescriptions() (map[string]string, []string) {
 	sortedKeys := make([]string, 0)
 
 	for key, value := range queues {
-		if len(value) == 1 && len(key) > 0 {
+		if len(value) > 1 && len(key) > 0 {
 			result[key] = value[1]
 			sortedKeys = append(sortedKeys, key)
 		}
 	}
 
-	sort.Slice(sortedKeys, func(i, j int) bool { return i < j })
+	sort.Slice(sortedKeys, func(i, j int) bool { return sortedKeys[i] < sortedKeys[j] })
 	return result, sortedKeys
 }

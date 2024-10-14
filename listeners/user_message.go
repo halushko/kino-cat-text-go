@@ -37,7 +37,7 @@ func StartUserMessageListener() {
 				log.Printf("[HandleTextMessages] ERROR:%s", err)
 				return
 			}
-			if err = nats_helper.PublishToNATS("TELEGRAM_INPUT_TEXT_QUEUE", jsonData); err != nil {
+			if err = nats_helper.PublishToNATS("TELEGRAM_OUTPUT_TEXT_QUEUE", jsonData); err != nil {
 				log.Printf("[HandleTextMessages] ERROR:%s", err)
 				return
 			}
@@ -64,7 +64,7 @@ func StartUserMessageListener() {
 		Handler: processor,
 	}
 
-	nats_helper.StartNatsListener("TELEGRAM_OUTPUT_TEXT_QUEUE", listener)
+	nats_helper.StartNatsListener("TELEGRAM_INPUT_TEXT_QUEUE", listener)
 }
 
 func parseNatsMessage(data []byte) (int64, string) {
