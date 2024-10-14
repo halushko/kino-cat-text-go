@@ -1,32 +1,18 @@
 package kino_cat_text_go
 
 import (
+	"github.com/halushko/kino-cat-core-go/logger_helper"
 	"kino-cat-text-go/listeners"
 	"log"
-	"os"
 )
 
 //goland:noinspection ALL
 func main() {
-	logFile := prepareLogFile()
+	logFile := logger_helper.SoftPrepareLogFile()
 	log.SetOutput(logFile)
-	defer func() {
-		if err := logFile.Close(); err != nil {
-			log.Println("Помилка при спробі закрити лог файл")
-		}
-	}()
 
 	listeners.StartUserMessageListener()
 	listeners.StartGetHelpCommandListener()
-}
 
-func prepareLogFile() *os.File {
-	log.Print("Старт бота")
-
-	logFile, err := os.OpenFile("bot.log", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0777)
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	return logFile
+	logger_helper.SoftLogClose(logFile)
 }
