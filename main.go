@@ -11,8 +11,8 @@ func main() {
 	logFile := logger_helper.SoftPrepareLogFile()
 	log.SetOutput(logFile)
 
-	go listeners.StartUserMessageListener()
-	go listeners.StartGetHelpCommandListener()
+	listeners.StartUserMessageListener()
+	listeners.StartGetHelpCommandListener()
 
 	select {}
 }
