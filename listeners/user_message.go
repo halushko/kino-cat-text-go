@@ -41,7 +41,7 @@ func StartUserMessageListener() {
 			}
 
 		} else {
-			log.Println("[StartNatsListener] Помилка: ID користувача чи текст повідомлення порожні")
+			log.Printf("[StartNatsListener] Помилка: ID користувача чи текст повідомлення порожні")
 		}
 	}
 
