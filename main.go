@@ -14,5 +14,5 @@ func main() {
 	listeners.StartUserMessageListener()
 	listeners.StartGetHelpCommandListener()
 
-	select {}
+	//select {}
 }
