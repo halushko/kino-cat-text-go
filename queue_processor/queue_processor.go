@@ -21,7 +21,7 @@ var queues = map[string][]string{
 	"/approve_with_files_":   {"EXECUTE_TORRENT_COMMAND_DELETE_WITH_FILES", "видалити вказаний торент разом з файлами"},
 	"/approve_just_torrent_": {"EXECUTE_TORRENT_COMMAND_DELETE_ONLY_TORRENT", "видалити вказаний торент, але залишити файли"},
 	"/files_":                {"EXECUTE_TORRENT_COMMAND_LIST_FILES", "відобразити всі файли, що будуть скачані в цьому торенті"},
-	"/remove_":               {"EXECUTE_TORRENT_COMMAND_DELETE_ONLY_TORRENT", "видалення вказаного торента"},
+	"/remove_":               {"EXECUTE_TORRENT_COMMAND_DELETE", "видалення вказаного торента"},
 	"/downloads":             {"EXECUTE_LIST_TORRENTS_IN_DOWNLOAD_STATUS", "відобразити всі торенти що знаходяться в стані \"завантаження\""},
 	"/help":                  {"DISPLAY_ALL_COMMANDS", "вивести інформацію по всім командам"},
 	"":                       {"EXECUTE_TORRENT_COMMAND_SEARCH_BY_NAME"},
