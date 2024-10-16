@@ -6,11 +6,9 @@ import (
 )
 
 var queues = map[string][]string{
-	"/space":                 {"FILE_MOVE_TO_FOLDER"},
-	"/start_":                {"FILE_SHOW_FREE_SPACE"},
-	"/list":                  {"EXECUTE_TORRENT_COMMAND_SHOW_COMMANDS", "відобразити всі торенти, можна запускати для конкретного сховища"},
+	"/list":                  {"EXECUTE_TORRENT_COMMAND_LIST", "відобразити всі торенти, можна запускати для конкретного сховища"},
 	"/list_":                 {},
-	"/more_":                 {"EXECUTE_TORRENT_COMMAND_LIST_FILES", "перелічити можливі команди для вказаного торента"},
+	"/more_":                 {"EXECUTE_TORRENT_COMMAND_SHOW_COMMANDS", "перелічити можливі команди для вказаного торента"},
 	"/resume_":               {"EXECUTE_TORRENT_COMMAND_RESUME_TORRENT", "продовжити закачувати цей торент"},
 	"/pause_":                {"EXECUTE_TORRENT_COMMAND_PAUSE_TORRENT", "тимчасово припинити закачувати цей торент"},
 	"/resume_all":            {"EXECUTE_TORRENT_COMMAND_RESUME_ALL_TORRENTS", "продовжити закачувати всі торенти, можна запускати для конкретного сховища"},
@@ -18,14 +16,18 @@ var queues = map[string][]string{
 	"/pause_all":             {"EXECUTE_TORRENT_COMMAND_PAUSE_ALL_TORRENTS", "тимчасово припинити закачувати всі торенти, можна запускати для конкретного сховища"},
 	"/pause_all_":            {},
 	"/info_":                 {"EXECUTE_TORRENT_COMMAND_INFO", "відобразити інформацію по торенту"},
+	"/remove_":               {"EXECUTE_TORRENT_COMMAND_DELETE", "видалення вказаного торента"},
 	"/approve_with_files_":   {"EXECUTE_TORRENT_COMMAND_DELETE_WITH_FILES", "видалити вказаний торент разом з файлами"},
 	"/approve_just_torrent_": {"EXECUTE_TORRENT_COMMAND_DELETE_ONLY_TORRENT", "видалити вказаний торент, але залишити файли"},
-	"/files_":                {"EXECUTE_TORRENT_COMMAND_LIST_FILES", "відобразити всі файли, що будуть скачані в цьому торенті"},
-	"/remove_":               {"EXECUTE_TORRENT_COMMAND_DELETE_ONLY_TORRENT", "видалення вказаного торента"},
-	"/downloads":             {"EXECUTE_LIST_TORRENTS_IN_DOWNLOAD_STATUS", "відобразити всі торенти що знаходяться в стані \"завантаження\""},
-	"/help":                  {"DISPLAY_ALL_COMMANDS", "вивести інформацію по всім командам"},
-	"":                       {"EXECUTE_TORRENT_COMMAND_SEARCH_BY_NAME"},
-	"<якийсь текст>":         {"", "пошук торентів по частині назві"},
+
+	"/files_":    {"EXECUTE_TORRENT_COMMAND_LIST_FILES", "відобразити всі файли, що будуть скачані в цьому торенті"},
+	"/downloads": {"EXECUTE_LIST_TORRENTS_IN_DOWNLOAD_STATUS", "відобразити всі торенти що знаходяться в стані \"завантаження\""},
+	"/space":     {"FILE_MOVE_TO_FOLDER"},
+	"/start_":    {"FILE_SHOW_FREE_SPACE"},
+
+	"/help":          {"DISPLAY_ALL_COMMANDS", "вивести інформацію по всім командам"},
+	"":               {"EXECUTE_TORRENT_COMMAND_SEARCH_BY_NAME"},
+	"<якийсь текст>": {"", "пошук торентів по частині назві"},
 }
 
 func FindQueueByMessage(message string) (string, bool) {
@@ -36,8 +38,6 @@ func FindQueueByMessage(message string) (string, bool) {
 					_, size := utf8.DecodeLastRuneInString(message)
 					correctedMessage := message[:len(message)-size]
 					return FindQueueByMessage(correctedMessage)
-				} else {
-					return "", false
 				}
 			}
 			return queues[key][0], true

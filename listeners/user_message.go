@@ -16,32 +16,17 @@ type TelegramUserNatsMessage struct {
 
 type commandNatsMessage struct {
 	ChatID    int64    `json:"chat_id"`
-	Command   string   `json:"command"`
 	Arguments []string `json:"arguments"`
 }
 
 func StartUserMessageListener() {
 	processor := func(msg *nats.Msg) {
-		log.Printf("[StartNatsListener] Отримано повідомлення з NATS: %s", string(msg.Data))
+		log.Printf("[StartUserMessageListener] Отримано повідомлення з NATS: %s", string(msg.Data))
 		chatId, messageText := parseNatsMessage(msg.Data)
 
-		log.Printf("[StartNatsListener] Парсинг повідомлення: chatID = %d, message = %s", chatId, messageText) // Новый лог для проверки данных
+		log.Printf("[StartUserMessageListener] Парсинг повідомлення: chatID = %d, message = %s", chatId, messageText) // Новый лог для проверки данных
 
 		if chatId != 0 && messageText != "" {
-
-			jsonData, err := json.Marshal(TelegramUserNatsMessage{
-				ChatId: chatId,
-				Text:   messageText,
-			})
-			if err != nil {
-				log.Printf("[HandleTextMessages] ERROR:%s", err)
-				return
-			}
-			if err = nats_helper.PublishToNATS("TELEGRAM_OUTPUT_TEXT_QUEUE", jsonData); err != nil {
-				log.Printf("[HandleTextMessages] ERROR:%s", err)
-				return
-			}
-
 			queue, arguments := findDataToAnotherProcessorRedirection(messageText)
 
 			if request, errMarshal := json.Marshal(commandNatsMessage{
@@ -56,7 +41,7 @@ func StartUserMessageListener() {
 			}
 
 		} else {
-			log.Println("[StartNatsListener] Помилка: ID користувача чи текст повідомлення порожні")
+			log.Printf("[StartUserMessageListener] Помилка: ID користувача чи текст повідомлення порожні")
 		}
 	}
 
@@ -70,7 +55,7 @@ func StartUserMessageListener() {
 func parseNatsMessage(data []byte) (int64, string) {
 	var msg TelegramUserNatsMessage
 	if err := json.Unmarshal(data, &msg); err != nil {
-		log.Printf("[StartNatsListener] Помилка при розборі повідомлення з NATS: %v", err)
+		log.Printf("[StartUserMessageListener] Помилка при розборі повідомлення з NATS: %v", err)
 		return 0, ""
 	}
 
@@ -79,7 +64,7 @@ func parseNatsMessage(data []byte) (int64, string) {
 
 func findDataToAnotherProcessorRedirection(message string) (string, []string) {
 	messageLength := len(message)
-	for i := 0; i < messageLength; i++ {
+	for i := 0; i < messageLength+1; i++ {
 		command := message[:messageLength-i]
 		queue, flag := queue_processor.FindQueueByMessage(command)
 		if flag {

@@ -8,7 +8,7 @@ import (
 	"log"
 )
 
-func StartGetHelpCommandListener() {
+func StartGetHelpCommandListener() *nats.Conn {
 	processor := func(msg *nats.Msg) {
 		log.Printf("[StartGetHelpCommandListener] Отримано повідомлення з NATS: %s", string(msg.Data))
 		chatId, messageText := parseNatsMessage(msg.Data)
@@ -56,5 +56,5 @@ func StartGetHelpCommandListener() {
 		Handler: processor,
 	}
 
-	nats_helper.StartNatsListener("DISPLAY_ALL_COMMANDS", listener)
+	return nats_helper.StartNatsListener("DISPLAY_ALL_COMMANDS", listener)
 }
