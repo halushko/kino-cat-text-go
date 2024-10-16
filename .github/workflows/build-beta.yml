@@ -5,6 +5,7 @@ on:
     branches-ignore:
       - master
       - development
+      - prepare-release
 
 jobs:
   publish:
