@@ -21,10 +21,10 @@ type commandNatsMessage struct {
 
 func StartUserMessageListener() {
 	processor := func(msg *nats.Msg) {
-		log.Printf("[StartNatsListener] Отримано повідомлення з NATS: %s", string(msg.Data))
+		log.Printf("[StartUserMessageListener] Отримано повідомлення з NATS: %s", string(msg.Data))
 		chatId, messageText := parseNatsMessage(msg.Data)
 
-		log.Printf("[StartNatsListener] Парсинг повідомлення: chatID = %d, message = %s", chatId, messageText) // Новый лог для проверки данных
+		log.Printf("[StartUserMessageListener] Парсинг повідомлення: chatID = %d, message = %s", chatId, messageText) // Новый лог для проверки данных
 
 		if chatId != 0 && messageText != "" {
 			queue, arguments := findDataToAnotherProcessorRedirection(messageText)
@@ -41,7 +41,7 @@ func StartUserMessageListener() {
 			}
 
 		} else {
-			log.Printf("[StartNatsListener] Помилка: ID користувача чи текст повідомлення порожні")
+			log.Printf("[StartUserMessageListener] Помилка: ID користувача чи текст повідомлення порожні")
 		}
 	}
 
@@ -55,7 +55,7 @@ func StartUserMessageListener() {
 func parseNatsMessage(data []byte) (int64, string) {
 	var msg TelegramUserNatsMessage
 	if err := json.Unmarshal(data, &msg); err != nil {
-		log.Printf("[StartNatsListener] Помилка при розборі повідомлення з NATS: %v", err)
+		log.Printf("[StartUserMessageListener] Помилка при розборі повідомлення з NATS: %v", err)
 		return 0, ""
 	}
 
