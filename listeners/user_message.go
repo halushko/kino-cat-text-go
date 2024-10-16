@@ -64,7 +64,7 @@ func parseNatsMessage(data []byte) (int64, string) {
 
 func findDataToAnotherProcessorRedirection(message string) (string, []string) {
 	messageLength := len(message)
-	for i := 0; i < messageLength; i++ {
+	for i := 0; i < messageLength+1; i++ {
 		command := message[:messageLength-i]
 		queue, flag := queue_processor.FindQueueByMessage(command)
 		if flag {

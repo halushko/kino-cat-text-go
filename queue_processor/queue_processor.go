@@ -34,7 +34,7 @@ func FindQueueByMessage(message string) (string, bool) {
 	for key := range queues {
 		if key == message {
 			if len(queues[key]) == 0 {
-				if len(message) >= 0 {
+				if len(message) > 0 {
 					_, size := utf8.DecodeLastRuneInString(message)
 					correctedMessage := message[:len(message)-size]
 					return FindQueueByMessage(correctedMessage)
