@@ -4,7 +4,6 @@ go 1.23.2
 
 require (
 	github.com/halushko/kino-cat-core-go v0.0.0-20241027083015-dd9bb3601be0
-	github.com/nats-io/nats.go v1.37.0
 )
 
 require (
