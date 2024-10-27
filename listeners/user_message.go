@@ -1,65 +1,43 @@
 package listeners
 
 import (
-	"encoding/json"
 	"github.com/halushko/kino-cat-core-go/nats_helper"
-	"github.com/nats-io/nats.go"
 	"kino-cat-text-go/queue_processor"
 	"log"
 	"strings"
 )
 
-type TelegramUserNatsMessage struct {
-	ChatId int64  `json:"chat_id"`
-	Text   string `json:"text"`
-}
-
-type commandNatsMessage struct {
-	ChatID    int64    `json:"chat_id"`
-	Arguments []string `json:"arguments"`
-}
-
 func StartUserMessageListener() {
-	processor := func(msg *nats.Msg) {
-		log.Printf("[StartUserMessageListener] Отримано повідомлення з NATS: %s", string(msg.Data))
-		chatId, messageText := parseNatsMessage(msg.Data)
+	processor := func(data []byte) {
+		log.Printf("[StartUserMessageListener] Отримано повідомлення з NATS: %v", string(data))
+		userId, messageText, err := nats_helper.ParseNatsBotText(data)
+		if err != nil {
+			log.Printf("[StartUserMessageListener] Помилка при парсингу повідомлення: %v", err)
+		}
 
-		log.Printf("[StartUserMessageListener] Парсинг повідомлення: chatID = %d, message = %s", chatId, messageText) // Новый лог для проверки данных
+		log.Printf("[StartUserMessageListener] Парсинг повідомлення: chatID = %d, message = %s", userId, messageText)
 
-		if chatId != 0 && messageText != "" {
+		if userId != 0 && messageText != "" {
 			queue, arguments := findDataToAnotherProcessorRedirection(messageText)
 
-			if request, errMarshal := json.Marshal(commandNatsMessage{
-				ChatID:    chatId,
-				Arguments: arguments,
-			}); errMarshal == nil {
-				if errPublish := nats_helper.PublishToNATS(queue, request); errPublish != nil {
-					log.Printf("[StartUserMessageListener] ERROR in publish to %s:%s", queue, errPublish)
-				}
-			} else {
-				log.Printf("[StartUserMessageListener] ERROR in publish to %s:%s", queue, errMarshal)
+			err = nats_helper.PublishCommandMessage(queue, userId, arguments)
+			if err != nil {
+				log.Printf("[StartUserMessageListener] ERROR in publish to %s: %v", queue, err)
 			}
-
+			log.Printf("[StartUserMessageListener] Команда \"%s\" відправлена на обробку", queue)
 		} else {
 			log.Printf("[StartUserMessageListener] Помилка: ID користувача чи текст повідомлення порожні")
 		}
 	}
 
-	listener := &nats_helper.NatsListener{
-		Handler: processor,
+	listener := &nats_helper.NatsListenerHandler{
+		Function: processor,
 	}
 
-	nats_helper.StartNatsListener("TELEGRAM_INPUT_TEXT_QUEUE", listener)
-}
-
-func parseNatsMessage(data []byte) (int64, string) {
-	var msg TelegramUserNatsMessage
-	if err := json.Unmarshal(data, &msg); err != nil {
-		log.Printf("[StartUserMessageListener] Помилка при розборі повідомлення з NATS: %v", err)
-		return 0, ""
+	err := nats_helper.StartNatsListener("TELEGRAM_INPUT_TEXT_QUEUE", listener)
+	if err != nil {
+		log.Printf("[StartUserMessageListener] Помилка: %v", err)
 	}
-
-	return msg.ChatId, msg.Text
 }
 
 func findDataToAnotherProcessorRedirection(message string) (string, []string) {
