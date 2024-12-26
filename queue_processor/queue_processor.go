@@ -7,14 +7,11 @@ import (
 
 var queues = map[string][]string{
 	"/list":                  {"EXECUTE_TORRENT_COMMAND_LIST", "відобразити всі торенти, можна запускати для конкретного сховища"},
-	"/list_":                 {},
 	"/more_":                 {"EXECUTE_TORRENT_COMMAND_SHOW_COMMANDS", "перелічити можливі команди для вказаного торента"},
 	"/resume_":               {"EXECUTE_TORRENT_COMMAND_RESUME_TORRENT", "продовжити закачувати цей торент"},
 	"/pause_":                {"EXECUTE_TORRENT_COMMAND_PAUSE_TORRENT", "тимчасово припинити закачувати цей торент"},
 	"/resume_all":            {"EXECUTE_TORRENT_COMMAND_RESUME_ALL_TORRENTS", "продовжити закачувати всі торенти, можна запускати для конкретного сховища"},
-	"/resume_all_":           {},
 	"/pause_all":             {"EXECUTE_TORRENT_COMMAND_PAUSE_ALL_TORRENTS", "тимчасово припинити закачувати всі торенти, можна запускати для конкретного сховища"},
-	"/pause_all_":            {},
 	"/info_":                 {"EXECUTE_TORRENT_COMMAND_INFO", "відобразити інформацію по торенту"},
 	"/remove_":               {"EXECUTE_TORRENT_COMMAND_DELETE", "видалення вказаного торента"},
 	"/approve_with_files_":   {"EXECUTE_TORRENT_COMMAND_DELETE_WITH_FILES", "видалити вказаний торент разом з файлами"},
