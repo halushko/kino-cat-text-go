@@ -48,7 +48,8 @@ jobs:
           tags: |
             ${{ secrets.DOCKER_HUB_USERNAME }}/kino-cat-text-go:beta-${{ env.DOCKER_TAG }}
             ${{ secrets.DOCKER_HUB_USERNAME }}/kino-cat-text-go:beta-latest
+          platforms: linux/amd64,linux/arm64
 
       - name: Complete
         run: |
-          echo "Docker image published with tags: latest and ${{ env.DOCKER_TAG }}"
+          echo "Docker image published with tags: beta-latest and beta-${{ env.DOCKER_TAG }}"

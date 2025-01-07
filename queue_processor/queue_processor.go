@@ -18,9 +18,10 @@ var queues = map[string][]string{
 	"/approve_just_torrent_": {"EXECUTE_TORRENT_COMMAND_DELETE_ONLY_TORRENT", "видалити вказаний торент, але залишити файли"},
 
 	"/files_":    {"EXECUTE_TORRENT_COMMAND_LIST_FILES", "відобразити всі файли, що будуть скачані в цьому торенті"},
+	"/expand_":   {"EXECUTE_TORRENT_COMMAND_LIST_FILES", "відобразити всі файли, що будуть скачані в цьому торенті"},
 	"/downloads": {"EXECUTE_LIST_TORRENTS_IN_DOWNLOAD_STATUS", "відобразити всі торенти що знаходяться в стані \"завантаження\""},
-	"/space":     {"FILE_MOVE_TO_FOLDER"},
-	"/start_":    {"FILE_SHOW_FREE_SPACE"},
+	"/space":     {"FILE_SHOW_FREE_SPACE"},
+	"/start_":    {"FILE_MOVE_TO_FOLDER"},
 
 	"/help":          {"DISPLAY_ALL_COMMANDS", "вивести інформацію по всім командам"},
 	"":               {"EXECUTE_TORRENT_COMMAND_SEARCH_BY_NAME"},

@@ -2,6 +2,8 @@ github.com/halushko/kino-cat-core-go v0.0.0-20241027083015-dd9bb3601be0 h1:Jwaef
 github.com/halushko/kino-cat-core-go v0.0.0-20241027083015-dd9bb3601be0/go.mod h1:5nB9PMvPVXZBzd/bYtVNebhcL7W2VwU3Z6BI92reHuU=
 github.com/halushko/kino-cat-core-go v0.0.0-20241226130156-ce7346443be8 h1:x+StZsdl+9wKyi/yIYxYRl6IDirynbfaj71plavn/nc=
 github.com/halushko/kino-cat-core-go v0.0.0-20241226130156-ce7346443be8/go.mod h1:5nB9PMvPVXZBzd/bYtVNebhcL7W2VwU3Z6BI92reHuU=
+github.com/halushko/kino-cat-core-go v0.0.0-20250107134440-c4a6636370ba h1:XQzXKHLYBBFjBTs7PXZIz2R/MKIZclVdDMHqaw7tUAY=
+github.com/halushko/kino-cat-core-go v0.0.0-20250107134440-c4a6636370ba/go.mod h1:5nB9PMvPVXZBzd/bYtVNebhcL7W2VwU3Z6BI92reHuU=
 github.com/klauspost/compress v1.17.2 h1:RlWWUY/Dr4fL8qk9YG7DTZ7PDgME2V4csBXA8L/ixi4=
 github.com/klauspost/compress v1.17.2/go.mod h1:ntbaceVETuRiXiv4DpjP66DpAtAGkEQskQzEyD//IeE=
 github.com/klauspost/compress v1.17.9 h1:6KIumPrER1LHsvBVuDa0r5xaG0Es51mhhB9BQB2qeMA=

@@ -26,10 +26,7 @@ func StartGetHelpCommandListener() {
 			}
 			result := sb.String()
 
-			if err = nats_helper.PublishTextMessage("TELEGRAM_OUTPUT_TEXT_QUEUE", userId, result); err != nil {
-				log.Printf("[StartUserMessageListener] Не вдалося надіслати повідомлення \"%s\" через Телеграм бот", result)
-				return
-			}
+			nats_helper.SendMessageToUser(userId, result)
 		} else {
 			log.Printf("[StartGetHelpCommandListener] Помилка: ID користувача чи текст повідомлення порожні")
 		}

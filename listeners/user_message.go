@@ -20,10 +20,7 @@ func StartUserMessageListener() {
 		if userId != 0 && messageText != "" {
 			queue, arguments := findDataToAnotherProcessorRedirection(messageText)
 
-			err = nats_helper.PublishCommandMessage(queue, userId, arguments)
-			if err != nil {
-				log.Printf("[StartUserMessageListener] ERROR in publish to %s: %v", queue, err)
-			}
+			nats_helper.PublishCommandMessage(queue, userId, arguments)
 			log.Printf("[StartUserMessageListener] Команда \"%s\" відправлена на обробку", queue)
 		} else {
 			log.Printf("[StartUserMessageListener] Помилка: ID користувача чи текст повідомлення порожні")

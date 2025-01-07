@@ -2,7 +2,7 @@ module kino-cat-text-go
 
 go 1.23.2
 
-require github.com/halushko/kino-cat-core-go v0.0.0-20241226130156-ce7346443be8
+require github.com/halushko/kino-cat-core-go v0.0.0-20250107134440-c4a6636370ba
 
 require (
 	github.com/klauspost/compress v1.17.11 // indirect
