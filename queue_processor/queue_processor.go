@@ -13,6 +13,8 @@ var queues = map[string][]string{
 	"/resume_all":            {"EXECUTE_TORRENT_COMMAND_RESUME_ALL_TORRENTS", "продовжити закачувати всі торенти, можна запускати для конкретного сховища"},
 	"/pause_all":             {"EXECUTE_TORRENT_COMMAND_PAUSE_ALL_TORRENTS", "тимчасово припинити закачувати всі торенти, можна запускати для конкретного сховища"},
 	"/info_":                 {"EXECUTE_TORRENT_COMMAND_INFO", "відобразити інформацію по торенту"},
+	"/backlog_":              {"EXECUTE_TORRENT_COMMAND_BACKLOG", "перемістити файл до сховище \"Подивитися пізніше\""},
+	"/de_backlog_":           {"EXECUTE_TORRENT_COMMAND_DEBACKLOG", "перемістити файл зі сховище \"Подивитися пізніше\" назад"},
 	"/remove_":               {"EXECUTE_TORRENT_COMMAND_DELETE", "видалення вказаного торента"},
 	"/approve_with_files_":   {"EXECUTE_TORRENT_COMMAND_DELETE_WITH_FILES", "видалити вказаний торент разом з файлами"},
 	"/approve_just_torrent_": {"EXECUTE_TORRENT_COMMAND_DELETE_ONLY_TORRENT", "видалити вказаний торент, але залишити файли"},
