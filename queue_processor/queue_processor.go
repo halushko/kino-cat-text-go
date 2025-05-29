@@ -2,6 +2,7 @@ package queue_processor
 
 import (
 	"sort"
+	"strings"
 	"unicode/utf8"
 )
 
@@ -23,14 +24,20 @@ var queues = map[string][]string{
 	"/expand_":   {"EXECUTE_TORRENT_COMMAND_LIST_FILES", "відобразити всі файли, що будуть скачані в цьому торенті"},
 	"/downloads": {"EXECUTE_LIST_TORRENTS_IN_DOWNLOAD_STATUS", "відобразити всі торенти що знаходяться в стані \"завантаження\""},
 	"/space":     {"FILE_SHOW_FREE_SPACE"},
-	"/start_":    {"FILE_MOVE_TO_FOLDER"},
+	"/start_":    {"FILE_MOVE_TO_FOLDER", "Почати закачку торента"},
 
-	"/help":          {"DISPLAY_ALL_COMMANDS", "вивести інформацію по всім командам"},
+	"/utp_dwnl_": {"UTOPIA_GET_TORRENT_FILE", "Почати закачку торента"},
+
+	"/help": {"DISPLAY_ALL_COMMANDS", "вивести інформацію по всім командам"},
+	"Повідомлення з http всередині": {"", "Обробка торенту за URL"},
 	"":               {"EXECUTE_TORRENT_COMMAND_SEARCH_BY_NAME"},
 	"<якийсь текст>": {"", "пошук торентів по частині назві"},
 }
 
 func FindQueueByMessage(message string) (string, bool) {
+	if strings.Contains(strings.ToLower(message), "http") {
+		return "PROCESS_HTTP_QUEUE", true
+	}
 	for key := range queues {
 		if key == message {
 			if len(queues[key]) == 0 {

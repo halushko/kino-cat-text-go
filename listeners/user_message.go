@@ -4,6 +4,7 @@ import (
 	"github.com/halushko/kino-cat-core-go/nats_helper"
 	"kino-cat-text-go/queue_processor"
 	"log"
+	"regexp"
 	"strings"
 )
 
@@ -44,7 +45,16 @@ func findDataToAnotherProcessorRedirection(message string) (string, []string) {
 		queue, flag := queue_processor.FindQueueByMessage(command)
 		if flag {
 			log.Printf("[StartUserMessageListener] Queue \"%s\" found for \"%s\"", queue, message)
-			args := prepareArguments(message, command)
+
+			var args []string
+
+			switch {
+			case queue == "PROCESS_HTTP_QUEUE":
+				re := regexp.MustCompile(`https?://[^\s"']+`)
+				args = re.FindAllString(message, -1)
+			default:
+				args = prepareArguments(message, command)
+			}
 			log.Printf("[StartUserMessageListener] Arguments for request \"%s\": \"%s\"", command, args)
 			return queue, args
 		}

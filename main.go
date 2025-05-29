@@ -11,6 +11,7 @@ func main() {
 
 	go listeners.StartUserMessageListener()
 	go listeners.StartGetHelpCommandListener()
+	go listeners.ProcessHtml()
 
 	defer logger_helper.SoftLogClose(logFile)
 
